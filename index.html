@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Voyage Training</title>
+    <style>
+        :root { --bg: #0f172a; --card: #1e293b; --push: #ef4444; --pull: #22c55e; --legs: #3b82f6; --text: #f8fafc; }
+        body { font-family: sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        .nav { display: flex; gap: 8px; width: 100%; max-width: 400px; margin-bottom: 20px; }
+        .nav button { flex: 1; padding: 15px; border: none; border-radius: 10px; color: white; font-weight: bold; }
+        .card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 15px; width: 100%; max-width: 400px; box-sizing: border-box; }
+        .guide-box { width: 100%; aspect-ratio: 1/1; background: #fff; border-radius: 10px; margin: 10px 0; overflow: hidden; }
+        .guide-box img { width: 100%; height: 100%; object-fit: contain; }
+        .btn-log { width: 100%; padding: 15px; background: var(--pull); border: none; border-radius: 10px; color: white; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <button style="background:var(--push)" onclick="load('push')">Push</button>
+        <button style="background:var(--pull)" onclick="load('pull')">Pull</button>
+        <button style="background:var(--legs)" onclick="load('legs')">Legs</button>
+    </div>
+    <div id="main"></div>
+
+    <script>
+        const workouts = {
+            push: [{ n: "Incline Smith Press", t: "4x6-8", img: "smith.gif" }, { n: "DB Shoulder Press", t: "3x8-10", img: "shoulder.gif" }],
+            pull: [{ n: "Lat Pulldown", t: "3x10-12", img: "latpull.gif" }, { n: "Seated Row", t: "4x8-10", img: "row.gif" }],
+            legs: [{ n: "Leg Press", t: "4x10-12", img: "legpress.gif" }, { n: "Back Squat", t: "4x6-8", img: "squat.gif" }]
+        };
+
+        function load(day) {
+            const main = document.getElementById('main');
+            main.innerHTML = '';
+            workouts[day].forEach((ex) => {
+                main.innerHTML += `
+                    <div class="card">
+                        <h2>${ex.n}</h2>
+                        <p>${ex.t}</p>
+                        <div class="guide-box"><img src="${ex.img}"></div>
+                        <button class="btn-log">LOG SET</button>
+                    </div>`;
+            });
+        }
+        load('push');
+    </script>
+</body>
+</html>
